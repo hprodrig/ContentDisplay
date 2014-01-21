@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>Slide Narration with HTML5 Audio</title>
+  <!-- button id="btPlayAudio" type="button" onclick="playAudio()">Play audio</button -->
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" href="./lib/deck.js/core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" href="./lib/deck.js/extensions/menu/deck.menu.css">
+  <link rel="stylesheet" href="./lib/deck.js/extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" href="./lib/deck.js/extensions/status/deck.status.css">
+  <link rel="stylesheet" href="./lib/deck.js/extensions/hash/deck.hash.css">
+  <link rel="stylesheet" href="./lib/deck.js/extensions/scale/deck.scale.css">
+  <link rel="stylesheet" href="./lib/deck.automatic.js/automatic/deck.automatic.css">
+
+  <link rel="stylesheet" href="./deck.narrator.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" href="./lib/deck.js/themes/style/web-2.0.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" href="./lib/deck.js/themes/transition/horizontal-slide.css">
+
+  <!-- Required Modernizr file -->
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="./lib/deck.js/modernizr.custom.js"></script>
+  
+  <!-- Code for teaching point objects -->
+  <script src="./teachingPoint.js"></script>
+</head>
+<body class="deck-container">
+
+<!-- Begin slides. Just make elements with a class of slide. -->
+<section class="slide" data-narrator-duration="2" data-duration="2000"><p><img src="slides/Slide1.png"/></p></section>
+<section class="slide" data-narrator-duration="28" data-duration="28000"><p><img src="slides/Slide2.png"/></p></section>
+<section class="slide" data-narrator-duration="107" data-duration="107000"><p><img src="slides/Slide3.png"/></p></section>
+<section class="slide" data-narrator-duration="256" data-duration="256000"><p><img src="slides/Slide4.png"/></p></section>
+<section class="slide" data-narrator-duration="162" data-duration="162000"><p><img src="slides/Slide5.png"/></p></section>
+<section class="slide" data-narrator-duration="214" data-duration="214000"><p><img src="slides/Slide6.png"/></p></section>
+<section class="slide" data-narrator-duration="165" data-duration="165000"><p><img src="slides/Slide7.png"/></p></section>
+<section class="slide" data-narrator-duration="257" data-duration="257000"><p><img src="slides/Slide8.png"/></p></section>
+<section class="slide" data-narrator-duration="8" data-duration="8000"><p><img src="slides/Slide9.png"/></p></section>
+<section class="slide" data-narrator-duration="106" data-duration="106000"><p><img src="slides/Slide10.png"/></p></section>
+<section class="slide" data-narrator-duration="47" data-duration="47000"><p><img src="slides/Slide11.png"/></p></section>
+<section class="slide" data-narrator-duration="116" data-duration="1160000"><p><img src="slides/Slide12.png"/></p></section>
+<section class="slide" data-narrator-duration="275" data-duration="275000"><p><img src="slides/Slide13.png"/></p></section>
+<section class="slide" data-narrator-duration="165" data-duration="165000"><p><img src="slides/Slide14.png"/></p></section>
+<section class="slide" data-narrator-duration="112" data-duration="112000"><p><img src="slides/Slide15.png"/></p></section>
+<section class="slide" data-narrator-duration="232" data-duration="232000"><p><img src="slides/Slide16.png"/></p></section>
+<section class="slide" data-narrator-duration="112" data-duration="112000"><p><img src="slides/Slide17.png"/></p></section>
+<section class="slide" data-narrator-duration="70" data-duration="700000"><p><img src="slides/Slide18.png"/></p></section>
+<section class="slide" data-narrator-duration="154" data-duration="1540000"><p><img src="slides/Slide19.png"/></p></section>
+<section class="slide" data-narrator-duration="190" data-duration="1900000"><p><img src="slides/Slide20.png"/></p></section>
+<section class="slide" data-narrator-duration="70" data-duration="700000"><p><img src="slides/Slide21.png"/></p></section>
+<section class="slide" data-narrator-duration="80" data-duration="80000"><p><img src="slides/Slide22.png"/></p></section>
+
+<!-- End slides. -->
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+
+<!-- deck.status snippet -->
+<p class="deck-status">
+  <span class="deck-status-current"></span>
+  /
+  <span class="deck-status-total"></span>
+</p>
+
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<!-- deck.narrator snippet -->
+<div id="audio-div">
+  <audio controls class="deck-narrator-audio" id="narrator-audio">
+	  <source src="lec7oct2013_tts_eval.mp3" type="audio/mpeg" />
+	  <track kind="caption" src="transcript.vtt" srclang="en" label="English" />
+  </audio>
+</div>
+<!-- End extension snippets. -->
+
+<p id="time">Begin End</p>
+<!-- Required JS files. -->
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="./lib/deck.js/core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="./lib/deck.js/core/deck.core.js"></script>
+<script src="./lib/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="./lib/deck.js/extensions/menu/deck.menu.js"></script>
+<script src="./lib/deck.js/extensions/status/deck.status.js"></script>
+<script src="./lib/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="./lib/deck.js/extensions/scale/deck.scale.js"></script>
+<script src="./lib/deck.automatic.js/automatic/deck.automatic.js"></script>
+<script src="./deck.narrator.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  //document.getElementById("audio-div").style.visibility = 'hidden';
+  $(function() {
+    $.extend(true, $.deck.defaults, {
+      automatic: {
+        startRunning: false,
+        cycle: false
+      }
+    });
+    $.deck('.slide');
+  });
+</script>
+<script>
+  	function playAudio(){
+		hiddenFlag = document.getElementById("audio-div").style.visibility;
+		audioButton = document.getElementById("btPlayAudio");
+		if(hiddenFlag == 'hidden'){
+			document.getElementById("audio-div").style.visibility = 'visible';
+			document.getElementById('narrator-audio').muted = false;
+			audioButton.childNodes[0].nodeValue = 'Pause audio';
+			$.deck('play');
+		}
+		else{
+			$.deck('pause');
+			document.getElementById("audio-div").style.visibility = 'hidden';
+			document.getElementById('narrator-audio').muted = true;
+			audioButton.childNodes[0].nodeValue = 'Play audio';
+		}
+	}
+</script>
+<!-- JS for good looking dialogs -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<!-- link rel="stylesheet" href="questionsCSS.css"-->
+<div id="dialog" title="ViTA">
+	<style scoped>
+        @import "css/my/dialog.css";
+    </style>
+  <img src='Filipe_blue_bg.png'>
+  <p id="wording">Question 666?</p>
+  <textarea id="answerTxt"></textarea>
+  <button class="ui-button-text" type="button" onclick="evalAnswer()">Submit</button>
+  <p id="grounding" class="grounding"></p>
+  <!-- button id="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" onclick="evalAnswer()">
+	<span class="ui-button-text">Submit</span -->
+</button>
+</div>
+
+<div id="dialogEndTP" title="">
+	<style scoped>
+        @import "css/my/dialog.css";
+    </style>
+  <p id="wording">Done Teaching Point!</p>
+  <button class="ui-button-text" type="button" onclick="continueLesson()">Ok</button>
+</button>
+</div>
+
+<link href="css/redmond/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+<script>
+  $(function() {
+    $("#dialog").dialog({
+				autoOpen: false
+			});
+  });
+  
+  $(function() {
+    $("#dialogEndTP").dialog({
+				autoOpen: false
+			});
+  });
+  
+  function evalAnswer(){
+		//alert('eval');
+		answer = document.getElementById('answerTxt').value;
+		correct = currentTP.isCorrect(answer);
+		document.getElementById('answerTxt').value = '';
+		//alert(correct);
+		if(correct){
+			hasNextQuestion = currentTP.hasNextQuestion();
+			//alert('hasNextQuestion ' + hasNextQuestion);
+			if(hasNextQuestion){
+				//student should do more questions in this TP
+				//this depends on the student model
+				document.getElementById("wording").innerHTML = currentTP.nextQuestion();
+			}
+			else{
+				//case where TP is completed
+				$("#dialog").dialog("close");
+				$("#dialogEndTP").dialog({
+					modal: true,
+					draggable: false,
+					width: 500
+				});
+				$("#dialogEndTP").dialog("open");
+			}
+		}
+		else{
+			//student did not get the answer corect
+			document.getElementById("grounding").innerHTML = 'Your answer is not correct.';
+		}
+	}
+	
+	function continueLesson(){
+		//alert(currentTP.slideNumber);
+		$("#dialogEndTP").dialog("close");
+		nextSlideNumber = currentTP.slideNumber+1;
+		currentTP = nextTP();
+		$.deck('go', nextSlideNumber);
+		document.getElementById('narrator-audio').muted = false;
+		//audio.play();
+		//$.deck('go', 1);
+		//$.deck('play');
+		//audio.play();
+	}
+	$('textarea').focus(function() {
+		document.getElementById("grounding").innerHTML = '';
+	});
+</script>
+</body>
+</html>
