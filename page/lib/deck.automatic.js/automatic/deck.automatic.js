@@ -35,22 +35,22 @@ This module adds automatic control of the deck.
 			
 			var duration = opts.automatic.slideDuration;
 
-      // Iterate over element's classes to
-      // match against classdata
-      $.each(elem.attr('class').split(/\s+/), function(idx, cls){
-        $.each(opts.classdata, function(feat_cls, features){
-          if(cls == feat_cls && features.duration){
-            duration = features.duration;
-          }
-        });
-      });
+			  // Iterate over element's classes to
+			  // match against classdata
+			  $.each(elem.attr('class').split(/\s+/), function(idx, cls){
+				$.each(opts.classdata, function(feat_cls, features){
+				  if(cls == feat_cls && features.duration){
+					duration = features.duration;
+				  }
+				});
+			  });
 
 			var customDuration = elem.attr('data-duration');
 			if(customDuration){
 			  duration = customDuration;
 			}
 
-      // If duration is negative, don't set a timeout
+			// If duration is negative, don't set a timeout
 			if(duration >= 0){
 			  if (to == $[deck]('getSlides').length-1) {
 				  // setTimeout... called when going to last slide. 
@@ -71,6 +71,10 @@ This module adds automatic control of the deck.
 			  }
 			  else {
 				  // Running, not yet on last slide.
+				  if(wasSlidePause){
+					duration = $('.slide.deck-current').attr('data-duration');
+					wasSlidePause = false;
+				  }
 				  $[deck].automatic = {
 					  timeout: window.setTimeout(function() {
 						  $[deck]('next');
@@ -78,7 +82,7 @@ This module adds automatic control of the deck.
 					  }, duration)
 				  };
 			  }
-      }
+			}
 		}
 	};
 	

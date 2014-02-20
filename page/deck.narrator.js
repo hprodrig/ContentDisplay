@@ -16,6 +16,12 @@ https://github.com/imakewebthings/deck.js/blob/master/GPL-license.txt
       segmentEnd = 0;
 	  
 var lockTP = false;
+var wasSlidePause = false;
+
+function getCurrentSlideID(){
+	var slideID = document.getElementsByClassName("slide deck-current")[0].id;
+	return parseInt(slideID.slice(6));
+}
 /*
 This module adds a audio narration to slides
 */
@@ -77,6 +83,10 @@ This module adds a audio narration to slides
   }
 
   function stopSlides (ev) {
+    slideID = getCurrentSlideID();
+	var remainTime = segments[slideID][1] - audio.currentTime;
+	$('.slide.deck-current').attr('data-duration', remainTime*1000);
+	wasSlidePause = true;
     $.deck('pause');
   }
   
@@ -95,9 +105,7 @@ This module adds a audio narration to slides
   
   function checkIfIsTP (ev) {
   
-
-	slideID = document.getElementsByClassName("slide deck-current")[0].id;
-	intSlideID = parseInt(slideID.substr(slideID.length - 1));
+	intSlideID = getCurrentSlideID();
 	
 	if(lockTP){
 		ev.preventDefault();
