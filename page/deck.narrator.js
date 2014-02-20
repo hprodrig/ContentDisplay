@@ -14,7 +14,8 @@ https://github.com/imakewebthings/deck.js/blob/master/GPL-license.txt
       segments = [],
 	  programSeek = true;
       segmentEnd = 0;
-
+	  
+var lockTP = false;
 /*
 This module adds a audio narration to slides
 */
@@ -97,14 +98,18 @@ This module adds a audio narration to slides
 
 	slideID = document.getElementsByClassName("slide deck-current")[0].id;
 	intSlideID = parseInt(slideID.substr(slideID.length - 1));
-	//alert(intSlideID);
+	
+	if(lockTP){
+		ev.preventDefault();
+	}
 
-	 if(currentTP.slideNumber == intSlideID){
+	 if(!lockTP && currentTP.slideNumber == intSlideID){
+		lockTP = true;
 		ev.preventDefault();		
 		//Major hack!!!!! Pausing causes unwanted slide change after play
 		document.getElementById('narrator-audio').muted = true;
-		
 		document.getElementById("wording").innerHTML = currentTP.nextQuestion();
+		currentTP.buildForm('answerCheckbox');
 		 $("#dialog").dialog({
 				modal: true,
 				draggable: false,

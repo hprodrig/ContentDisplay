@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=1024, user-scalable=no">
 
-  <title>Slide Narration with HTML5 Audio</title>
+  <title>Speech Processing Class</title>
   <!-- button id="btPlayAudio" type="button" onclick="playAudio()">Play audio</button -->
   <!-- Required stylesheet -->
   <link rel="stylesheet" href="./lib/deck.js/core/deck.core.css">
@@ -139,11 +139,15 @@
 	<style scoped>
         @import "css/my/dialog.css";
     </style>
-  <img src='Filipe_blue_bg.png'>
+  <img id="VTAimg" src='Filipe_blue_bg.png'>
   <p id="wording">Question 666?</p>
-  <textarea id="answerTxt"></textarea>
-  <button class="ui-button-text" type="button" onclick="evalAnswer()">Submit</button>
-  <p id="grounding" class="grounding"></p>
+  <form action="" id="answerCheckbox">
+  </form>
+  <button id="submitButton" class="ui-button-text" type="button" onclick="evalAnswer()">Submit</button>
+  <div id="feedBack" style="vertical-align: middle;">
+	  <p id="grounding" class="grounding"></p>
+	  <button id="next_ex" class="ui-button-text" type="button" onclick="nexQuestion()" style="margin-left:50px; display: none;">Next</button>
+  </div>	
   <!-- button id="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" onclick="evalAnswer()">
 	<span class="ui-button-text">Submit</span -->
 </button>
@@ -162,7 +166,10 @@
 <script>
   $(function() {
     $("#dialog").dialog({
-				autoOpen: false
+				autoOpen: false,
+				open: function (){
+					$(this).find('input').first().blur();
+				}
 			});
   });
   
@@ -174,37 +181,66 @@
   
   function evalAnswer(){
 		//alert('eval');
-		answer = document.getElementById('answerTxt').value;
-		correct = currentTP.isCorrect(answer);
-		document.getElementById('answerTxt').value = '';
-		//alert(correct);
-		if(correct){
-			hasNextQuestion = currentTP.hasNextQuestion();
-			//alert('hasNextQuestion ' + hasNextQuestion);
-			if(hasNextQuestion){
-				//student should do more questions in this TP
-				//this depends on the student model
-				document.getElementById("wording").innerHTML = currentTP.nextQuestion();
-			}
-			else{
-				//case where TP is completed
-				$("#dialog").dialog("close");
-				$("#dialogEndTP").dialog({
-					modal: true,
-					draggable: false,
-					width: 500
-				});
-				$("#dialogEndTP").dialog("open");
-			}
+		answers = $('#answerCheckbox :checked').map(function(){
+														return $(this).val();
+													});
+		correctionCode = currentTP.isCorrect(answers);
+		//student did not get the answer corect
+		var fbStr;
+		if(correctionCode == 2){
+			$("#submitButton").prop("disabled",true);
+			$('input[name="selAnswer"]').attr('disabled', 'disabled');
+			$('.hyp').css('color', '#C0C0C0;');
+			
+			$(".grounding").css('color', '#009900');
+			fbStr = 'Your answer is correct.';
+			document.getElementById("next_ex").style.display = 'block';
+		}
+		else if(correctionCode == 1){
+			$(".grounding").css('color', '	#718DE2');
+			fbStr = 'You are going well, but still missing something.';
+		}
+		else if(correctionCode == 0){
+			$(".grounding").css('color', '#FFCC00');
+			fbStr = 'That is not quite correct.';
+		}
+		else if(correctionCode == -1){
+			$(".grounding").css('color', '#D63030');
+			fbStr = 'Not even close...';
+		}
+		document.getElementById("grounding").innerHTML = fbStr;
+   }
+   
+   function nexQuestion(){
+		$('input:checkbox').removeAttr('checked');
+		$("#submitButton").prop("disabled",false);
+		$('input[name="selAnswer"]').attr('disabled', 'enabled');
+		$('.hyp').css('color', '#000000;');
+			
+		document.getElementById("next_ex").style.display = 'none';
+		document.getElementById("grounding").style.display = 'none';
+		hasNextQuestion = currentTP.hasNextQuestion();
+		//alert('hasNextQuestion ' + hasNextQuestion);
+		if(hasNextQuestion){
+			//student should do more questions in this TP
+			//this depends on the student model
+			document.getElementById("wording").innerHTML = currentTP.nextQuestion();
 		}
 		else{
-			//student did not get the answer corect
-			document.getElementById("grounding").innerHTML = 'Your answer is not correct.';
+			//case where TP is completed
+			$("#dialog").dialog("close");
+			$("#dialogEndTP").dialog({
+				modal: true,
+				draggable: false,
+				width: 500
+			});
+			$("#dialogEndTP").dialog("open");
 		}
-	}
+   }
 	
 	function continueLesson(){
 		//alert(currentTP.slideNumber);
+		lockTP = false;
 		$("#dialogEndTP").dialog("close");
 		nextSlideNumber = currentTP.slideNumber+1;
 		currentTP = nextTP();

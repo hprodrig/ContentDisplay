@@ -155,6 +155,12 @@ that use the API provided by core.
     ].join(', ');
 
     $document.unbind('keydown.deck').bind('keydown.deck', function(event) {
+	  //Yet anothe major hack!!
+	  // keyCode 39 is right arrow. When we start slides with arrow right a double slide change happens. This hack prevents that.
+	  if(event.keyCode == 39 && currentIndex == 0){
+		audio.play();
+		return;
+	  }
       var isNext = event.which === options.keys.next;
       var isPrev = event.which === options.keys.previous;
       isNext = isNext || $.inArray(event.which, options.keys.next) > -1;

@@ -1,4 +1,4 @@
-	@charset "UTF-8";
+@charset "UTF-8";
 /* Resets and base styles from HTML5 Boilerplate */
 div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -256,7 +256,7 @@ video, iframe, img {
 }
 
 p, blockquote, iframe, img, ul, ol, pre, video {
-  //margin-bottom: 5px;
+  margin-bottom: 1em;
 }
 
 pre {
@@ -434,17 +434,17 @@ a:hover, a:focus {
   font-size: 1.75em;
   background: #f4fafe;
   /* Old browsers */
-  background: -moz-linear-gradient(top, #F2F2F2 0%, #FFFFFF 100%);
+  background: -moz-linear-gradient(top, #f4fafe 0%, #ccf0f0 100%);
   /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F2F2F2), color-stop(100%, #FFFFFF));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4fafe), color-stop(100%, #ccf0f0));
   /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(bottom, #F2F2F2 100%, #FFFFFF 100%);
+  background: -webkit-linear-gradient(top, #f4fafe 0%, #ccf0f0 100%);
   /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #F2F2F2 0%, #FFFFFF 100%);
+  background: -o-linear-gradient(top, #f4fafe 0%, #ccf0f0 100%);
   /* Opera11.10+ */
-  background: -ms-linear-gradient(top, #F2F2F2 0%, #FFFFFF 100%);
+  background: -ms-linear-gradient(top, #f4fafe 0%, #ccf0f0 100%);
   /* IE10+ */
-  background: linear-gradient(top, #F2F2F2 0%, #FFFFFF 100%);
+  background: linear-gradient(top, #f4fafe 0%, #ccf0f0 100%);
   /* W3C */
   background-attachment: fixed;
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
@@ -477,7 +477,6 @@ a:hover, a:focus {
 
 .deck-status {
   font-size: 0.6666em;
-  right: 15px;
 }
 
 .deck-menu .slide {
