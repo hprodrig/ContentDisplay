@@ -42,9 +42,10 @@ color:#990000 !important;
 text-decoration:underline !important;
 }
 
-p{
+p, a{
 	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
 	font-size: 62.5%;
+	display: block;
 }
 
 p#exID{
@@ -61,9 +62,12 @@ margin-left: 5px;
 
 p.grounding
 {
-margin-bottom: 8px;
-padding-left:130px;
+//margin-bottom: 8px;
 color:#FFCC00;
+}
+
+#feedBack{
+margin-left: 130px;
 }
 
 p#wording
@@ -256,5 +260,18 @@ textarea.otherEmotion {
 #VTAimg{
 	margin-bottom: 0px;
 }
+
+ul {
+	margin-left: 35px !important;
+}
+
+li {
+	padding: 0px !important;
+	height: 25px !important;
+}
+
+a:hover {
+  cursor:pointer;
+ }
 
 

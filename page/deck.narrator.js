@@ -103,7 +103,7 @@ This module adds a audio narration to slides
 	  }
   }
   
-  function checkIfIsTP (ev) {
+  function checkIfIsTP (ev, from, to) {
   
 	intSlideID = getCurrentSlideID();
 	
@@ -111,12 +111,11 @@ This module adds a audio narration to slides
 		ev.preventDefault();
 	}
 
-	 if(!lockTP && currentTP.slideNumber == intSlideID){
+	if(from < to && !lockTP && currentTP.slideNumber == intSlideID){
 		lockTP = true;
 		ev.preventDefault();		
 		//Major hack!!!!! Pausing causes unwanted slide change after play
 		document.getElementById('narrator-audio').muted = true;
-		document.getElementById("wording").innerHTML = currentTP.nextQuestion();
 		currentTP.buildForm('answerCheckbox');
 		 $("#dialog").dialog({
 				modal: true,
@@ -125,6 +124,7 @@ This module adds a audio narration to slides
 			});
 		$(".ui-dialog-titlebar-close", this.parentNode).hide();
 		$("#dialog").dialog("open");
+		document.getElementById("wording").innerHTML = currentTP.currentQuestion().wording;
 	}
   }
   
