@@ -17,6 +17,8 @@ https://github.com/imakewebthings/deck.js/blob/master/GPL-license.txt
 	  
 var lockTP = false;
 var wasSlidePause = false;
+//flag used to see if we should display the pre TP dialog (we only want to show it the first time we enter the TP)
+var firstTPopen = true;
 
 function getCurrentSlideID(){
 	var slideID = document.getElementsByClassName("slide deck-current")[0].id;
@@ -111,20 +113,26 @@ This module adds a audio narration to slides
 		ev.preventDefault();
 	}
 
-	if(from < to && !lockTP && currentTP.slideNumber == intSlideID){
+	if(!lockTP && currentTP.slideNumber == to){
 		lockTP = true;
-		ev.preventDefault();		
-		//Major hack!!!!! Pausing causes unwanted slide change after play
-		document.getElementById('narrator-audio').muted = true;
-		currentTP.buildForm('answerCheckbox');
-		 $("#dialog").dialog({
-				modal: true,
-				draggable: false,
-				width: 500
+		ev.preventDefault();
+		if(firstTPopen){
+			currentTP.buildForm('answerCheckbox');
+			//Major hack!!!!! Pausing causes unwanted slide change after play
+			document.getElementById('narrator-audio').muted = true;
+			firstTPopen = false;
+			$("#dialogBeginTP").dialog({
+					modal: true,
+					draggable: false,
+					width: 500
 			});
-		$(".ui-dialog-titlebar-close", this.parentNode).hide();
-		$("#dialog").dialog("open");
-		document.getElementById("wording").innerHTML = currentTP.currentQuestion().wording;
+			$(".ui-dialog-titlebar-close", this.parentNode).hide();
+			$("#dialogBeginTP").dialog("open");
+			document.getElementById("tpDesc").innerHTML = currentTP.tpDesc;
+		}
+		else{
+			openTP();
+		}
 	}
   }
   
