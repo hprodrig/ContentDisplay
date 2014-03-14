@@ -32,6 +32,7 @@
   
   <!-- Code for teaching point objects -->
   <script src="./teachingPoint.js"></script>
+  <script src="./teachingPointNavigator.js"></script>
 </head>
 <body class="deck-container">
 
@@ -58,6 +59,7 @@
 <section class="slide" data-narrator-duration="190" data-duration="190000" style="z-index:0;"><p><img src="slides/Slide20.png"/></p></section>
 <section class="slide" data-narrator-duration="70" data-duration="70000" style="z-index:0;"><p><img src="slides/Slide21.png"/></p></section>
 <section class="slide" data-narrator-duration="80" data-duration="80000" style="z-index:0;"><p><img src="slides/Slide22.png"/></p></section>
+<section class="slide" data-narrator-duration="80" data-duration="80000" style="z-index:0;"><p><img src="slides/Slide23.png"/></p></section>
 
 <!-- End slides. -->
 
@@ -133,10 +135,12 @@
 <!-- JS for good looking dialogs -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<button id="doEx" class="ui-button-text" type="button" onclick="doExercises()">Exercises</button>
-<p id="time">Begin End</p>
+<p id="time" style="display: none;">Begin End</p>
+<p id="time" style="padding-left:40px; font-size:23px; margin-bottom:5px; margin-top:10px; color:#2D21B5;"><u><b>Table of Content:</b></u></p>
+<div id="tpMenu">
+</div>
 <!-- link rel="stylesheet" href="questionsCSS.css"-->
-<div id="dialog" title="">
+<div id="dialog" title="Exercise 1/2">
 	<style scoped>
         @import "css/my/dialog.css";
     </style>
@@ -148,6 +152,7 @@
   <div id="feedBack" style="vertical-align: middle;">
 	  <p id="grounding" class="grounding"></p>
 	  <button id="next_ex" class="ui-button-text" type="button" onclick="nexQuestion()" style="margin-top:10px; display: none;">Next</button>
+	  <button id="doneTP" class="ui-button-text" type="button" onclick="closeTP()" style="margin-left: 5px; margin-top:10px; display: none;">Done</button>
   </div>	
   <!-- button id="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" onclick="evalAnswer()">
 	<span class="ui-button-text">Submit</span -->
@@ -202,7 +207,11 @@
 		//alert('eval');
 		answers = $('#answerCheckbox :checked').map(function(){
 														return $(this).val();
-													});
+													});											
+		if(answers.length == 0){
+			//student did not check any answer box
+			return;
+		}
 		correctionCode = currentTP.isCorrect(answers);
 		//removing possible hanging study pointers
 		$('.studyPointer').remove();
@@ -215,6 +224,26 @@
 			$(".grounding").css('color', '#009900');
 			fbStr = 'Your answer is correct.';
 			document.getElementById("next_ex").style.display = 'block';
+			if(currentTP.doneTP()){
+				document.getElementById("doneTP").style.display = 'block';
+			}
+			else{
+				document.getElementById("doneTP").style.display = 'none';
+			}
+		}
+		else if(correctionCode == -2){
+			$("#submitButton").prop("disabled",true);
+			$('input[name="selAnswer"]').attr('disabled', 'disabled');
+			$(".grounding").css('color', '#D63030');
+			fbStr = 'The answer is still not correct. You can check the correct answer now.';
+			currentTP.bottomOut();
+			document.getElementById("next_ex").style.display = 'block';
+			if(currentTP.doneTP()){
+				document.getElementById("doneTP").style.display = 'block';
+			}
+			else{
+				document.getElementById("doneTP").style.display = 'none';
+			}
 		}
 		else{
 			currentTP.addStudySuggestions($(".grounding"));
@@ -224,11 +253,11 @@
 			}
 			else if(correctionCode == 0){
 				$(".grounding").css('color', '#FFCC00');
-				fbStr = 'That is not quite correct.';
+				fbStr = 'Although you are not wrong, you are missing the bigger picture.';
 			}
 			else if(correctionCode == -1){
 				$(".grounding").css('color', '#D63030');
-				fbStr = 'Not even close...';
+				fbStr = 'Your answer is not correct.';
 			}
 			fbStr = fbStr + ' ' + currentTP.currentQuestion().getInnerLoopFeedback();			
 		}
@@ -236,13 +265,18 @@
 		showFeedback();
 		
 		//trying to keep a good dialog height...
-		if(correctionCode == 2){
+		/*if(correctionCode == 2){
 			$('#dialog').css('height', 'auto');
 		}
 		else{
 			//$('#dialog').css('height', $('#dialog').height() + 40 + 'px');	
 			$('#dialog').css('height', $('#dialog').height() + 'px');	
-		}
+		}*/
+		
+		$('#dialog').css('height', 'auto');
+		$("#dialog").dialog({
+				position: {'my': 'center', 'at': 'center'}				
+		});
    }
    
    function nexQuestion(){
@@ -262,23 +296,16 @@
 		}
 		else{
 			//case where TP is completed
-			$("#dialog").dialog("close");
-			$("#dialogEndTP").dialog({
-				modal: true,
-				draggable: false,
-				width: 500
-			});
-			$("#dialogEndTP").dialog("open");
-			document.getElementById("tpConclusion").innerHTML = currentTP.tpConclusion;
+			closeTP();
 		}
    }
    
    function hideFeedBack(){
 		//document.getElementById("feedBack").style.display = 'none';
-	
 		$('.studyPointer').remove();
 		document.getElementById("next_ex").style.display = 'none';
 		document.getElementById("grounding").style.display = 'none';
+		document.getElementById("doneTP").style.display = 'none';
    }
    
    function showFeedback(){
@@ -302,10 +329,10 @@
 		//audio.play();
 	}
 	
-	function doExercises(){
+	function doExercises(slideNumber){
 		//alert('back to exercises');
 		lockTP = false;
-		$.deck('go', currentTP.slideNumber);
+		$.deck('go', slideNumber);
 	}
 	
 	function openTP(){
@@ -316,11 +343,27 @@
 				draggable: false,
 				width: 600
 			});
-		$('#doEx').css("display", "none");
 		$(".ui-dialog-titlebar-close", this.parentNode).hide();
 		$("#dialogBeginTP").dialog("close");
 		$("#dialog").dialog("open");
 		document.getElementById("wording").innerHTML = currentTP.currentQuestion().wording;
+	}
+	
+	function closeTP(){
+		$('input:checkbox').removeAttr('checked');
+		$("#submitButton").prop("disabled",false);
+		$('input[name="selAnswer"]').attr('disabled', 'enabled');
+		$('.hyp').css('color', '#000000;');
+		hideFeedBack();
+		$("#dialog").dialog("close");
+		$("#dialogEndTP").dialog({
+			modal: true,
+			draggable: false,
+			width: 500
+		});
+		$('.ui-dialog-title').text("");
+		$("#dialogEndTP").dialog("open");
+		document.getElementById("tpConclusion").innerHTML = currentTP.tpConclusion;
 	}
 	
 	function getRemainingMarginWidth(){
@@ -348,8 +391,7 @@
 	}
 	
 	$(document).ready(function () {
-		$('#doEx').css("margin-left", (getRemainingMarginWidth()+getSlideWidth()+10)+"px");
-		$('#doEx').css("display", "none");
+		tpMenuNav.buildTPMenu("tpMenu");
 	});
 </script>
 </body>

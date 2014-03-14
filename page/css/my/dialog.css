@@ -242,6 +242,7 @@ textarea.otherEmotion {
 .ui-dialog .ui-dialog-title {
   text-align: center;
   width: 100%;
+  font-size: 26px;
 }
 
 .ui-widget-overlay{
@@ -281,6 +282,18 @@ a:hover {
 #doEx{
 	width: 90px; 
 	z-index: 1; 
-	position: absolute;
-	margin-top: 10px;
+	position: relative;
+	margin-top: 5px;
+	margin-right: 300px;
+	margin-left: 40px;
+	margin-bottom: 10px;
+}
+
+.tpItem{
+	font-size:20px !important;
+	margin: 0;
+	padding-top: 5px;
+	padding-left: 40px !important;
+	pointer-events: none;
+    cursor: default;
 }

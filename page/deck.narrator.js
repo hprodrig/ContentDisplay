@@ -74,6 +74,10 @@ This module adds a audio narration to slides
 	  programSeek = true;
       audio.play();
     }
+	if(to == 1){
+		tpMenuNav.tpItemArray[0].unlockItem();
+	}
+	tpMenuNav.slideChange(to);
   }
 
   function toMinutes(secs){
@@ -108,7 +112,11 @@ This module adds a audio narration to slides
   function checkIfIsTP (ev, from, to) {
   
 	intSlideID = getCurrentSlideID();
-	
+	//shows the arrow for first topic
+	if(intSlideID == 0){
+		tpMenuNav.changeItem(currentItem);
+		currentItem = currentItem + 1;
+	}
 	if(lockTP){
 		ev.preventDefault();
 	}
