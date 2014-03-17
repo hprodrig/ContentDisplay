@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="./lib/deck.js/themes/transition/horizontal-slide.css">
 
   <!-- Required Modernizr file -->
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="./lib/jquery-1.9.1.js"></script>
   <script src="./lib/deck.js/modernizr.custom.js"></script>
   
   <!-- Code for teaching point objects -->
@@ -88,7 +88,7 @@
 <!-- End extension snippets. -->
 
 <!-- Required JS files. -->
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="./lib/jquery-1.10.1.min.js"></script>
 <script src="./lib/deck.js/core/deck.core.js"></script>
 
 <!-- Extension JS files. Add or remove as needed. -->
@@ -133,8 +133,8 @@
 	}
 </script>
 <!-- JS for good looking dialogs -->
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="./lib/jquery-ui.css">
+<script src="./lib/jquery-ui.js"></script>
 <p id="time" style="display: none;">Begin End</p>
 <p id="time" style="padding-left:40px; font-size:23px; margin-bottom:5px; margin-top:10px; color:#2D21B5;"><u><b>Table of Content:</b></u></p>
 <div id="tpMenu">
@@ -184,7 +184,7 @@
   $(function() {
     $("#dialog").dialog({
 				autoOpen: false,
-				maxHeight: 5000,
+				maxHeight: $(window).height()-40,
 				open: function (){
 					$(this).find('input').first().blur();
 				}
@@ -275,7 +275,8 @@
 		
 		$('#dialog').css('height', 'auto');
 		$("#dialog").dialog({
-				position: {'my': 'center', 'at': 'center'}				
+				position: {'my': 'center', 'at': 'center'},
+				maxHeight: $(window).height()-40
 		});
    }
    
@@ -332,6 +333,7 @@
 	function doExercises(slideNumber){
 		//alert('back to exercises');
 		lockTP = false;
+		pressedExercisesButton = true;
 		$.deck('go', slideNumber);
 	}
 	
@@ -341,12 +343,17 @@
 		 $("#dialog").dialog({
 				modal: true,
 				draggable: false,
-				width: 600
+				width: 600,
+				maxHeight: $(window).width() - 40
 			});
 		$(".ui-dialog-titlebar-close", this.parentNode).hide();
 		$("#dialogBeginTP").dialog("close");
 		$("#dialog").dialog("open");
 		document.getElementById("wording").innerHTML = currentTP.currentQuestion().wording;
+		$('#dialog').css('height', 'auto');
+		$("#dialog").dialog({
+				position: {'my': 'center', 'at': 'center'}				
+		});
 	}
 	
 	function closeTP(){
@@ -364,6 +371,7 @@
 		$('.ui-dialog-title').text("");
 		$("#dialogEndTP").dialog("open");
 		document.getElementById("tpConclusion").innerHTML = currentTP.tpConclusion;
+		currentTP.hasDoneTP = true;
 	}
 	
 	function getRemainingMarginWidth(){

@@ -6,6 +6,8 @@ var tp5Item = new tpItem('- Experimental problems', 8, 7, 7	);
 var tp6Item = new tpItem('- Post test', 22, 21, 21);
 var tpMenuNav = new tpMenu([tp1Item, tp2Item, tp3Item, tp4Item, tp5Item, tp6Item]);
 var currentItem = 0;
+//variable used to decide if TP should be opened (if is from exercise button key press always opens, if is from arrow slide change should open only once)
+var pressedExercisesButton = false;
 
 function tpItem(desc, slideID, bottomRange, topRange){
 	this.desc=desc;

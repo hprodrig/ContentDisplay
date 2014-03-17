@@ -77,6 +77,7 @@ This module adds a audio narration to slides
 	if(to == 1){
 		tpMenuNav.tpItemArray[0].unlockItem();
 	}
+	//calling this method syncronizes TPs with current slide
 	tpMenuNav.slideChange(to);
   }
 
@@ -122,21 +123,29 @@ This module adds a audio narration to slides
 	}
 
 	if(!lockTP && currentTP.slideNumber == to){
+		if(!pressedExercisesButton && currentTP.hasDoneTP){
+			//case where TP would be trigered by a slide change but the TP has already been done
+			// !pressedExercisesButton provides the exception that the student deliberatly wants to do the TP again
+			return;
+		}
+		
 		lockTP = true;
+		pressedExercisesButton = false;
 		ev.preventDefault();
 		if(firstTPopen){
 			currentTP.buildForm('answerCheckbox');
+			document.getElementById("tpDesc").innerHTML = currentTP.tpDesc;
 			//Major hack!!!!! Pausing causes unwanted slide change after play
 			document.getElementById('narrator-audio').muted = true;
 			firstTPopen = false;
 			$("#dialogBeginTP").dialog({
 					modal: true,
 					draggable: false,
-					width: 500
+					width: 500,
+					position: {'my': 'center', 'at': 'center'}		
 			});
 			$(".ui-dialog-titlebar-close", this.parentNode).hide();
 			$("#dialogBeginTP").dialog("open");
-			document.getElementById("tpDesc").innerHTML = currentTP.tpDesc;
 		}
 		else{
 			openTP();

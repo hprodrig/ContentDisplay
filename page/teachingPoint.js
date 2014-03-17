@@ -150,6 +150,7 @@ function teachingPoint(tpDesc, tpConclusion, tpQuestions, maxFeedBack, slideNumb
 	this.slideNumber=slideNumber;
 	this.questionIndex = 0;
 	this.feedBackCounter = 0;
+	this.hasDoneTP = false;
 
 	this.currentQuestion=currentQuestion;
 	this.nextQuestion=nextQuestion;
