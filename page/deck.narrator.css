@@ -1,8 +1,0 @@
-audio.deck-narrator-audio {
-  position: absolute;
-  bottom: 1%;
-  left: 50%;
-  width: 500px;
-  margin-left: -250px;
-  z-index: 10;
-}
