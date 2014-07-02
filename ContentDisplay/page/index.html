@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>Speech Processing Class</title>
+  <!-- button id="btPlayAudio" type="button" onclick="playAudio()">Play audio</button -->
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" href="./lib/deck.js/core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" href="./lib/deck.js/extensions/menu/deck.menu.css">
+  <link rel="stylesheet" href="./lib/deck.js/extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" href="./lib/deck.js/extensions/status/deck.status.css">
+  <link rel="stylesheet" href="./lib/deck.js/extensions/hash/deck.hash.css">
+  <link rel="stylesheet" href="./lib/deck.js/extensions/scale/deck.scale.css">
+  <link rel="stylesheet" href="./lib/deck.automatic.js/automatic/deck.automatic.css">
+
+  <link rel="stylesheet" href="./deck.narrator.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" href="./lib/deck.js/themes/style/web-2.0.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" href="./lib/deck.js/themes/transition/horizontal-slide.css">
+
+  <!-- Required Modernizr file -->
+  <script src="./lib/jquery-1.9.1.js"></script>
+  <script src="./lib/deck.js/modernizr.custom.js"></script>
+  
+  <!-- Code for teaching point objects -->
+  <script src="./teachingPoint.js"></script>
+  <script src="./teachingPointNavigator.js"></script>
+</head>
+<body class="deck-container">
+
+<!-- Begin slides. Just make elements with a class of slide. -->
+<section class="slide" data-narrator-duration="2" data-duration="2000" style="z-index:0;"><p><img src="slides/Slide1.png"/></p></section>
+<section class="slide" data-narrator-duration="28" data-duration="28000" style="z-index:0;"><p><img src="slides/Slide2.png"/></p></section>
+<section class="slide" data-narrator-duration="107" data-duration="107000" style="z-index:0;"><p><img src="slides/Slide3.png"/></p></section>
+<section class="slide" data-narrator-duration="256" data-duration="256000" style="z-index:0;"><p><img src="slides/Slide4.png"/></p></section>
+<section class="slide" data-narrator-duration="162" data-duration="162000" style="z-index:0;"><p><img src="slides/Slide5.png"/></p></section>
+<section class="slide" data-narrator-duration="214" data-duration="214000" style="z-index:0;"><p><img src="slides/Slide6.png"/></p></section>
+<section class="slide" data-narrator-duration="165" data-duration="165000" style="z-index:0;"><p><img src="slides/Slide7.png"/></p></section>
+<section class="slide" data-narrator-duration="257" data-duration="257000" style="z-index:0;"><p><img src="slides/Slide8.png"/></p></section>
+<section class="slide" data-narrator-duration="8" data-duration="8000" style="z-index:0;"><p><img src="slides/Slide9.png"/></p></section>
+<section class="slide" data-narrator-duration="106" data-duration="106000" style="z-index:0;"><p><img src="slides/Slide10.png"/></p></section>
+<section class="slide" data-narrator-duration="47" data-duration="47000" style="z-index:0;"><p><img src="slides/Slide11.png"/></p></section>
+<section class="slide" data-narrator-duration="116" data-duration="116000" style="z-index:0;"><p><img src="slides/Slide12.png"/></p></section>
+<section class="slide" data-narrator-duration="275" data-duration="275000" style="z-index:0;"><p><img src="slides/Slide13.png"/></p></section>
+<section class="slide" data-narrator-duration="165" data-duration="165000" style="z-index:0;"><p><img src="slides/Slide14.png"/></p></section>
+<section class="slide" data-narrator-duration="112" data-duration="112000" style="z-index:0;"><p><img src="slides/Slide15.png"/></p></section>
+<section class="slide" data-narrator-duration="232" data-duration="232000" style="z-index:0;"><p><img src="slides/Slide16.png"/></p></section>
+<section class="slide" data-narrator-duration="112" data-duration="112000" style="z-index:0;"><p><img src="slides/Slide17.png"/></p></section>
+<section class="slide" data-narrator-duration="70" data-duration="70000" style="z-index:0;"><p><img src="slides/Slide18.png"/></p></section>
+<section class="slide" data-narrator-duration="154" data-duration="154000" style="z-index:0;"><p><img src="slides/Slide19.png"/></p></section>
+<section class="slide" data-narrator-duration="190" data-duration="190000" style="z-index:0;"><p><img src="slides/Slide20.png"/></p></section>
+<section class="slide" data-narrator-duration="70" data-duration="70000" style="z-index:0;"><p><img src="slides/Slide21.png"/></p></section>
+<section class="slide" data-narrator-duration="80" data-duration="80000" style="z-index:0;"><p><img src="slides/Slide22.png"/></p></section>
+<section class="slide" data-narrator-duration="80" data-duration="80000" style="z-index:0;"><p><img src="slides/Slide23.png"/></p></section>
+
+<!-- End slides. -->
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+
+<!-- deck.status snippet -->
+<p class="deck-status">
+  <span class="deck-status-current"></span>
+  /
+  <span class="deck-status-total"></span>
+</p>
+
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<!-- deck.narrator snippet -->
+<div id="audio-div">
+  <audio controls class="deck-narrator-audio" id="narrator-audio">
+	  <source src="lec7oct2013_tts_eval.mp3" type="audio/mpeg" />
+	  <track kind="caption" src="transcript.vtt" srclang="en" label="English" />
+  </audio>
+</div>
+<!-- End extension snippets. -->
+
+<!-- Required JS files. -->
+<script src="./lib/jquery-1.10.1.min.js"></script>
+<script src="./lib/deck.js/core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="./lib/deck.js/core/deck.core.js"></script>
+<script src="./lib/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="./lib/deck.js/extensions/menu/deck.menu.js"></script>
+<script src="./lib/deck.js/extensions/status/deck.status.js"></script>
+<script src="./lib/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="./lib/deck.js/extensions/scale/deck.scale.js"></script>
+<script src="./lib/deck.automatic.js/automatic/deck.automatic.js"></script>
+<script src="./deck.narrator.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  //document.getElementById("audio-div").style.visibility = 'hidden';
+  $(function() {
+    $.extend(true, $.deck.defaults, {
+      automatic: {
+        startRunning: false,
+        cycle: false
+      }
+    });
+    $.deck('.slide');
+  });
+</script>
+<script>
+  	function playAudio(){
+		hiddenFlag = document.getElementById("audio-div").style.visibility;
+		audioButton = document.getElementById("btPlayAudio");
+		if(hiddenFlag == 'hidden'){
+			document.getElementById("audio-div").style.visibility = 'visible';
+			document.getElementById('narrator-audio').muted = false;
+			audioButton.childNodes[0].nodeValue = 'Pause audio';
+			$.deck('play');
+		}
+		else{
+			$.deck('pause');
+			document.getElementById("audio-div").style.visibility = 'hidden';
+			document.getElementById('narrator-audio').muted = true;
+			audioButton.childNodes[0].nodeValue = 'Play audio';
+		}
+	}
+</script>
+<!-- JS for good looking dialogs -->
+<link rel="stylesheet" href="./lib/jquery-ui.css">
+<script src="./lib/jquery-ui.js"></script>
+<p id="time" style="display: none;">Begin End</p>
+<p id="time" style="padding-left:40px; font-size:23px; margin-bottom:5px; margin-top:10px; color:#2D21B5;"><u><b>Table of Content:</b></u></p>
+<div id="tpMenu">
+</div>
+<!-- link rel="stylesheet" href="questionsCSS.css"-->
+<div id="dialog" title="Exercise 1/2">
+	<style scoped>
+        @import "css/my/dialog.css";
+    </style>
+  <img id="VTAimg" src='Filipe_blue_bg.png'>
+  <p id="wording">Question 666?</p>
+  <form action="" id="answerCheckbox">
+  </form>
+  <button id="submitButton" class="ui-button-text" type="button" onclick="evalAnswer()">Submit</button>
+  <div id="feedBack" style="vertical-align: middle;">
+	  <p id="grounding" class="grounding"></p>
+	  <button id="next_ex" class="ui-button-text" type="button" onclick="nexQuestion()" style="margin-top:10px; display: none;">Next</button>
+	  <button id="doneTP" class="ui-button-text" type="button" onclick="closeTP()" style="margin-left: 5px; margin-top:10px; display: none;">Done</button>
+  </div>	
+  <!-- button id="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" onclick="evalAnswer()">
+	<span class="ui-button-text">Submit</span -->
+</button>
+</div>
+
+<div id="dialogBeginTP" title="">
+	<style scoped>
+        @import "css/my/dialog.css";
+    </style>
+  <img id="VTAimg" src='Filipe_blue_bg.png'>
+  <p id="tpDesc"></p>
+  <button class="ui-button-text" type="button" onclick="openTP()" style="">Ok</button>
+</button>
+</div>
+
+<div id="dialogEndTP" title="">
+	<style scoped>
+        @import "css/my/dialog.css";
+    </style>
+  <img id="VTAimg" src='Filipe_blue_bg.png'>
+  <p id="tpConclusion"></p>
+  <button class="ui-button-text" type="button" onclick="continueLesson()">Ok</button>
+</button>
+</div>
+
+<link href="css/redmond/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+<script>
+  $(function() {
+    $("#dialog").dialog({
+				autoOpen: false,
+				maxHeight: $(window).height()-40,
+				open: function (){
+					$(this).find('input').first().blur();
+				}
+			});
+  });
+  
+  $(function() {
+    $("#dialogEndTP").dialog({
+				autoOpen: false
+			});
+  });
+  
+  $(function() {
+    $("#dialogBeginTP").dialog({
+				autoOpen: false
+			});
+  });
+  
+  function evalAnswer(){
+		//alert('eval');
+		answers = $('#answerCheckbox :checked').map(function(){
+														return $(this).val();
+													});											
+		if(answers.length == 0){
+			//student did not check any answer box
+			return;
+		}
+		correctionCode = currentTP.isCorrect(answers);
+		//removing possible hanging study pointers
+		$('.studyPointer').remove();
+		var fbStr;
+		if(correctionCode == 2){
+			$("#submitButton").prop("disabled",true);
+			$('input[name="selAnswer"]').attr('disabled', 'disabled');
+			$('.hyp').css('color', '#C0C0C0;');
+			
+			$(".grounding").css('color', '#009900');
+			fbStr = 'Your answer is correct.';
+			document.getElementById("next_ex").style.display = 'block';
+			if(currentTP.doneTP()){
+				document.getElementById("doneTP").style.display = 'block';
+			}
+			else{
+				document.getElementById("doneTP").style.display = 'none';
+			}
+		}
+		else if(correctionCode == -2){
+			$("#submitButton").prop("disabled",true);
+			$('input[name="selAnswer"]').attr('disabled', 'disabled');
+			$(".grounding").css('color', '#D63030');
+			fbStr = 'The answer is still not correct. You can check the correct answer now.';
+			currentTP.bottomOut();
+			document.getElementById("next_ex").style.display = 'block';
+			if(currentTP.doneTP()){
+				document.getElementById("doneTP").style.display = 'block';
+			}
+			else{
+				document.getElementById("doneTP").style.display = 'none';
+			}
+		}
+		else{
+			currentTP.addStudySuggestions($(".grounding"));
+			if(correctionCode == 1){
+				$(".grounding").css('color', '	#718DE2');
+				fbStr = 'You are going well, but there is still something missing.';
+			}
+			else if(correctionCode == 0){
+				$(".grounding").css('color', '#FFCC00');
+				fbStr = 'Although you are not wrong, you are missing the bigger picture.';
+			}
+			else if(correctionCode == -1){
+				$(".grounding").css('color', '#D63030');
+				fbStr = 'Your answer is not correct.';
+			}
+			fbStr = fbStr + ' ' + currentTP.currentQuestion().getInnerLoopFeedback();			
+		}
+		document.getElementById("grounding").innerHTML = fbStr;
+		showFeedback();
+		
+		//trying to keep a good dialog height...
+		/*if(correctionCode == 2){
+			$('#dialog').css('height', 'auto');
+		}
+		else{
+			//$('#dialog').css('height', $('#dialog').height() + 40 + 'px');	
+			$('#dialog').css('height', $('#dialog').height() + 'px');	
+		}*/
+		
+		$('#dialog').css('height', 'auto');
+		$("#dialog").dialog({
+				position: {'my': 'center', 'at': 'center'},
+				maxHeight: $(window).height()-40
+		});
+   }
+   
+   function nexQuestion(){
+		$('input:checkbox').removeAttr('checked');
+		$("#submitButton").prop("disabled",false);
+		$('input[name="selAnswer"]').attr('disabled', 'enabled');
+		$('.hyp').css('color', '#000000;');
+		hideFeedBack();
+		
+		hasNextQuestion = currentTP.hasNextQuestion();
+		//alert('hasNextQuestion ' + hasNextQuestion);
+		if(hasNextQuestion){
+			//student should do more questions in this TP
+			//this depends on the student model
+			document.getElementById("wording").innerHTML = currentTP.nextQuestion();
+			currentTP.buildForm('answerCheckbox');
+		}
+		else{
+			//case where TP is completed
+			closeTP();
+		}
+   }
+   
+   function hideFeedBack(){
+		//document.getElementById("feedBack").style.display = 'none';
+		$('.studyPointer').remove();
+		document.getElementById("next_ex").style.display = 'none';
+		document.getElementById("grounding").style.display = 'none';
+		document.getElementById("doneTP").style.display = 'none';
+   }
+   
+   function showFeedback(){
+		//document.getElementById("feedBack").style.display = 'block';
+		//document.getElementById("next_ex").style.display = 'block';
+		document.getElementById("grounding").style.display = 'block';
+   }
+	
+	function continueLesson(){
+		//alert(currentTP.slideNumber);
+		lockTP = false;
+		firstTPopen = true;
+		$("#dialogEndTP").dialog("close");
+		nextSlideNumber = currentTP.slideNumber;
+		currentTP = nextTP();
+		$.deck('go', nextSlideNumber);
+		document.getElementById('narrator-audio').muted = false;
+		//audio.play();
+		//$.deck('go', 1);
+		//$.deck('play');
+		//audio.play();
+	}
+	
+	function doExercises(slideNumber){
+		//alert('back to exercises');
+		lockTP = false;
+		pressedExercisesButton = true;
+		$.deck('go', slideNumber);
+	}
+	
+	function openTP(){
+		//Major hack!!!!! Pausing causes unwanted slide change after play
+		document.getElementById('narrator-audio').muted = true;
+		 $("#dialog").dialog({
+				modal: true,
+				draggable: false,
+				width: 600,
+				maxHeight: $(window).width() - 40
+			});
+		$(".ui-dialog-titlebar-close", this.parentNode).hide();
+		$("#dialogBeginTP").dialog("close");
+		$("#dialog").dialog("open");
+		document.getElementById("wording").innerHTML = currentTP.currentQuestion().wording;
+		$('#dialog').css('height', 'auto');
+		$("#dialog").dialog({
+				position: {'my': 'center', 'at': 'center'}				
+		});
+	}
+	
+	function closeTP(){
+		$('input:checkbox').removeAttr('checked');
+		$("#submitButton").prop("disabled",false);
+		$('input[name="selAnswer"]').attr('disabled', 'enabled');
+		$('.hyp').css('color', '#000000;');
+		hideFeedBack();
+		$("#dialog").dialog("close");
+		$("#dialogEndTP").dialog({
+			modal: true,
+			draggable: false,
+			width: 500
+		});
+		$('.ui-dialog-title').text("");
+		$("#dialogEndTP").dialog("open");
+		document.getElementById("tpConclusion").innerHTML = currentTP.tpConclusion;
+		currentTP.hasDoneTP = true;
+	}
+	
+	function getRemainingMarginWidth(){
+		return ($(window).width()-getSlideWidth())/2;
+	}
+
+	function getSlideWidth(){
+		if(typeof $('.slide.deck-current').find('.deck-slide-scaler').attr('style') === 'undefined'){
+			//case where no scale is being applied so we can actually return the real size of slide.
+			return $('.slide.deck-current').find('img').width();
+		}
+		var matrixRegex = /[0-9]+\.[0-9]+/;
+		var scaleVal = $('.slide.deck-current').find('.deck-slide-scaler').attr('style').toString().match(matrixRegex);
+		return $('.slide.deck-current').find('img').width()*scaleVal;
+	}
+
+	function getSlideHeight(){
+		if(typeof $('.slide.deck-current').find('.deck-slide-scaler').attr('style') === 'undefined'){
+			//case where no scale is being applied so we can actually return the real size of slide.
+			return $('.slide.deck-current').find('img').height();
+		}
+		var matrixRegex = /[0-9]+\.[0-9]+/;
+		var scaleVal = $('.slide.deck-current').find('.deck-slide-scaler').attr('style').toString().match(matrixRegex);
+		return $('.slide.deck-current').find('img').height()*scaleVal;
+	}
+	
+	$(document).ready(function () {
+		tpMenuNav.buildTPMenu("tpMenu");
+	});
+</script>
+</body>
+</html>

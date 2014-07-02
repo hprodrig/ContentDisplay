@@ -1,0 +1,299 @@
+.sample{margin:30px;border:1px solid #92cdec;background:#d7e7ff;padding:30px 30px 0 30px}
+
+div#bar-current.dialog_skillbar.jqbar{
+float: none !important;
+}
+
+dl{
+font-size:1.2em !important;
+line-height:60% !important;
+margin-bottom:200px !important
+}
+
+dl,dt,dd{
+padding:0 !important; 
+margin:0px !important;
+}
+
+.faqs{
+//padding-top:20px !important;
+}
+
+.faqs dt{
+font-weight:bold !important;
+background:url(images/q.gif) 0 3px no-repeat !important;
+padding:3px 0 15px 30px !important;
+position:relative !important;
+}
+
+.faqs dt:hover{
+cursor:pointer !important;
+}
+
+.faqs dd{
+background:url(images/a.gif) 0 3px no-repeat !important;
+padding:0 0 5px 30px !important;
+position:relative !important;
+color:#333 !important;
+}
+
+.faqs .hover{
+color:#990000 !important;
+text-decoration:underline !important;
+}
+
+p, a{
+	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	font-size: 62.5%;
+	display: block;
+}
+
+p#exID{
+	font-size: 14px;
+	text-align: right;
+	margin-top: 10px;
+}
+
+p#skillBarTitle{
+font-size: 12px;
+margin-bottom: 5px;
+margin-left: 5px;
+}
+
+p.grounding
+{
+//margin-bottom: 8px;
+color:#FFCC00;
+}
+
+#feedBack{
+margin-left: 130px;
+}
+
+p#wording, p#tpDesc, p#tpConclusion
+{
+margin-top: 12px;
+margin-bottom: 15px;
+}
+
+form#radiobuttons{
+	height: 30px;
+}
+
+p.feedback
+{
+font-size:15px !important;
+padding-left:10px;
+//max-width: 280px;
+}
+
+div.help{
+max-width: 550px;
+width: 550px;
+z-index:1;
+position: absolute;
+padding-left:13px;
+margin-top:10px;
+}
+
+p.faq{
+margin-top:0px;
+display:none;
+}
+
+p.faqSuggestionPar{
+display:none;
+font-size:12px;
+padding-bottom: 8px;
+}
+
+#skillbarTotal{
+font-size:16px;
+display:none;
+float:left;
+padding-left:5px;
+margin-top:10px;
+width: 1000px;
+//margin-top: 13px;
+}
+
+.dialog_skillbar
+{
+top:-1px;
+}
+
+label.hyp
+{
+font-size:15px !important;
+padding-left:3px;
+}
+
+label.hyp2
+{
+font-size:15px !important;
+padding-left:3px;
+}
+
+label.faqQestion
+{
+font-size:15px !important;
+padding-left:3px;
+}
+
+dt.faqQestion
+{
+font-size:14px !important;
+}
+
+dd.faqQestion
+{
+font-size:14px !important;
+vertical-align:text-top !important;
+}
+
+input { height: 18px; margin: 0; float: left; }
+label { 
+	width: 80%; 
+	float: left; 
+	margin-bottom: 10px;
+}
+
+button {
+	-moz-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #7ac5ff), color-stop(1, #486b9e) );
+	background:-moz-linear-gradient( center top, #7ac5ff 5%, #486b9e 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7ac5ff', endColorstr='#486b9e');
+	background-color:#7ac5ff;
+	-webkit-border-top-left-radius:0px;
+	-moz-border-radius-topleft:0px;
+	border-top-left-radius:0px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0;
+	border:1px solid #145ba3;
+	display:inline-block;
+	color:#ffffff;
+	font-family: Arial, Helvetica, sans-serif !important;
+	font-size: 15px !important;
+	font-weight:bold;
+	font-style:normal;
+	height:40px;
+	line-height:40px;
+	width:80px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #287ace;
+	float: left;
+}
+
+button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #486b9e), color-stop(1, #7ac5ff) );
+	background:-moz-linear-gradient( center top, #486b9e 5%, #7ac5ff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#486b9e', endColorstr='#7ac5ff');
+	background-color:#486b9e;
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+
+button:disabled {
+	background: rgb(246,248,249); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(246,248,249,1) 0%, rgba(229,235,238,1) 50%, rgba(215,222,227,1) 51%, rgba(245,247,249,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(246,248,249,1)), color-stop(50%,rgba(229,235,238,1)), color-stop(51%,rgba(215,222,227,1)), color-stop(100%,rgba(245,247,249,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */	
+}
+
+/*textarea{
+    font-size:15px !important;
+	width: 440px !important;
+	height: 80px !important;
+}*/
+
+input[type="text"],
+textarea.otherEmotion {
+    width:200px;
+    padding: 0;
+    border: 1px solid #ccc;
+	margin-left:10px;
+	font-size:15px;
+}
+
+#faqSuggestion{
+	 margin: 0 !important;
+	 height: 35px;
+	 font-size:13px;
+	 display: none;
+}
+
+.ui-dialog .ui-dialog-title {
+  text-align: center;
+  width: 100%;
+  font-size: 26px;
+}
+
+.ui-widget-overlay{
+     background: #000;
+            opacity: .5;
+            -moz-opacity: 0.5;
+            filter: alpha(opacity=50);
+}
+
+#submitQestion{
+	font-size:12px !important;
+	height: 25px !important;
+	width: 70px !important;
+	vertical-align: middle !important;
+	line-height: 10px;
+	margin-top: 6px;
+	display: none;
+}
+
+#VTAimg{
+	margin-bottom: 0px;
+}
+
+ul {
+	margin-left: 35px !important;
+}
+
+li {
+	padding: 0px !important;
+	height: 25px !important;
+}
+
+a:hover {
+  cursor:pointer;
+}
+
+#doEx{
+	width: 90px; 
+	z-index: 1; 
+	position: relative;
+	margin-top: 5px;
+	margin-right: 300px;
+	margin-left: 40px;
+	margin-bottom: 10px;
+}
+
+.tpItem{
+	font-size:20px !important;
+	margin: 0;
+	padding-top: 5px;
+	padding-left: 40px !important;
+	pointer-events: none;
+    cursor: default;
+}
